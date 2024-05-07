@@ -1,0 +1,10 @@
+articles urls:
+
+1. http://localhost:3020/ar?p=9db6f894-170e-4cd9-8fb3-e468ffef0a44
+    reference: https://www.nba.com/news/luka-doncic-anthony-edwards-shai-gilgeous-alexander-playoff-noise
+
+2. http://localhost:3020/ar?p=9d286f57-59e4-4b1d-aa12-2543912a248e
+    reference: https://www.nba.com/news/nba-draftkings-fanduel-dfs-primer-may-7
+
+3. http://localhost:3020/ar?p=26adf70b-d01d-4272-9a83-9c9540d64dce
+    reference: https://www.nba.com/news/nba-starting-5-may-7-2024
