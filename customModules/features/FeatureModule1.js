@@ -1,4 +1,5 @@
 import React from 'react'
+import { fetchArticle } from "./articleRequest"
 
 const Module = props => {
     const [ fetchBusy, setFetchBusy ] = React.useState(false)
@@ -6,9 +7,11 @@ const Module = props => {
     const [ validCc, setValidCc ] = React.useState(true)
     const [ cartMessages, setCartMessages ] = React.useState([])
 
+    fetchArticle()
+
     return (
         <React.Fragment>
-            <div>My Custom Module</div>
+            {/* <div>{res ? res.data.fetchedData[0].articleReq[0].title : null}</div> */}
         </React.Fragment>
     )
 }

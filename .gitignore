@@ -91,6 +91,8 @@ appServer/*
 !*/appServer/defaults/*
 !*appServer/defaults/
 
+webpack.config.js
+
 # Extra Ignore Files Here. Uncomment after initialization (node init_app.js)
 # !*customModules/middleware/*
 # !*customModules/admin/components/*
