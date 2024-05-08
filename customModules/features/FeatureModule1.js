@@ -6,12 +6,19 @@ const Module = props => {
     const [ pageError, setPageError ] = React.useState(null)
     const [ validCc, setValidCc ] = React.useState(true)
     const [ cartMessages, setCartMessages ] = React.useState([])
+    const [ articleData, setArticleData ] = React.useState(null)
 
-    fetchArticle()
+    React.useEffect(() => {
+        fetchArticle().then((data) => {
+        articleData ? setArticleData(data) : null
+        console.log("DATA FROM COMPONENT:", articleData.status)
+    })
+    },[])
+    // console.log(fetchArticle())
 
     return (
         <React.Fragment>
-            {/* <div>{res ? res.data.fetchedData[0].articleReq[0].title : null}</div> */}
+            <div>{articleData ? articleData.status : "loading..."}</div>
         </React.Fragment>
     )
 }
