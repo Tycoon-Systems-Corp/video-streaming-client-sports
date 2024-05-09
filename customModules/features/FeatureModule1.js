@@ -14,13 +14,21 @@ const Module = props => {
     const [ validCc, setValidCc ] = React.useState(true)
     const [ cartMessages, setCartMessages ] = React.useState([])
     const [ articleData, setArticleData ] = React.useState(null)
+    const [ imageArray, setImageArray ] = React.useState([])
 
     React.useEffect(() => {
         if (!componentDidMount) {
             setComponentDidMount(true)
             fetchArticle().then((response) => {
                 console.log(response)   
-                response ? setArticleData(response.data.fetchedData[0].articleReq[0]) : "test"
+                response ? setArticleData(response.data.fetchedData[0].articleReq[0]) : null
+                // articleData ? articleData.map(article => setImageArray(article.meta.featuredImg)) : null
+                articleData ? articleData.map(article => {
+                    // setImageArray(article.meta.featuredImg)
+                    article.meta.featuredImg ? setImageArray(article.meta.featuredImg) : null
+                }) : null
+
+                
             })
         } 
     },[])
@@ -33,17 +41,17 @@ const Module = props => {
             }
             const glide = new window.Glide(`.glide_${componentId}`, {
                 type: 'carousel',
-                perView: 4,
+                perView: 1,
                 focusAt: 0,
                 breakpoints: {
                     4000: {
-                        perView: 4
+                        perView: 1
                     },
                     1280: {
-                        perView: 3
+                        perView: 1
                     },
                     720: {
-                        perView: 2
+                        perView: 1
                     },
                     540: {
                         perView: 1
@@ -58,16 +66,23 @@ const Module = props => {
         }
     }, [ componentId ])
 
-    const useItems = props?.items?.map ? props.items : [ {}, {}, {}, {} ]
+    // const useItems = props?.items?.map ? props.items : [ "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg", "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg", "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg", "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg" ]
+    const useItems = [ "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg", "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg", "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg", "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg" ]
+    // const useItems = articleData ? articleData.meta.featuredImg : [ {}, {}, {}, {} ]
+
+    // let imageArray = []
+
+    // articleData ? articleData.map(article => imageArray.push(article.meta.featuredImg)) : null
+    // console.log(imageArray)
+
 
     return (
         <React.Fragment>
             {console.log("ARTICLE STATE:", articleData)}
-            {articleData ? articleData.map(article => <div>{article.title}</div>) : "loading..."}
+            {console.log("IMAGE STATE:", imageArray)}
+            {console.log("PROPS:", props)}
 
-            <div>
-                <a href="">READ MORE</a>
-            </div>
+            {articleData ? articleData.map(article => <div>{article.title}</div>) : "loading..."}
 
             <div className={`${Styles.IndexHelloContainer} glide_${componentId} ${moduleName}_IndexHelloContainer ${props.className}`}>
             {
@@ -84,7 +99,7 @@ const Module = props => {
                             (
                                 <div className={`${Styles.IndexItemUpperContainer} ${props.tall ? `${Styles.IndexItemsUpperContainerTall}` : null} ${moduleName}_Container`} key={i}>
                                     <Link href={m.date && !datePassed(m.date) && m?.item?.id ? `/e?p=${m.item.id}` : m.streamId ? `/w?v=${m.streamId}` : `/w?u=${m.author}`} style={{ alignSelf: 'center' }}>
-                                        <div className={`${Styles.BgContainer} ${props.tall ? `${Styles.BgContainerTall}` : null} ${moduleName}_BgContainer ${props.bgClassName}`} style={{ backgroundImage: `url(${m.leadBg && m?.leadBg !== '' ? m.leadBg : 'img/default/greythumb.jpg'})` }}>
+                                        <div className={`${Styles.BgContainer} ${props.tall ? `${Styles.BgContainerTall}` : null} ${moduleName}_BgContainer ${props.bgClassName}`} style={{ backgroundImage: `url(${m.leadBg && m?.leadBg !== '' ? m.leadBg : "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg"})` }}>
                                             {props.children}
                                             <div className={`${Styles.FillPageContainer} ${moduleName}_FillPageContainer`}>
                                                 <div className={`${Styles.TimeContainer} ${moduleName}_TimeContainer ${props.timeContainerClassName}`}>
@@ -99,6 +114,7 @@ const Module = props => {
                                             </div>
                                         </div>
                                     </Link>
+
                                     <div>
                                         <div className={`${Styles.MetaContainer} ${moduleName}_MetaContainer ${props.metaContainerClassName}`}>
                                             {
