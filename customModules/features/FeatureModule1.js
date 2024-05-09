@@ -1,8 +1,11 @@
 import React from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import Styles from '../../modules/presentation/Presentation.module.scss'
 import { fetchArticle } from "./articleRequest"
 import Link from 'next/link'
 import Image from 'next/image'
+import Glide, { Autoplay } from "@glidejs/glide/dist/glide.modular.esm"
+
 
 const moduleName = 'IndexBgHello'
 
@@ -18,17 +21,26 @@ const Module = props => {
 
     React.useEffect(() => {
         if (!componentDidMount) {
+
+            if (props.stagger) {
+                staggerRef.current = setTimeout(() => {
+                    setStagger(true)
+                }, props.stagger)
+            }
+
+            const id = uuidv4()
+
+            setComponentId(id)
+
             setComponentDidMount(true)
+
             fetchArticle().then((response) => {
                 console.log(response)   
                 response ? setArticleData(response.data.fetchedData[0].articleReq[0]) : null
-                // articleData ? articleData.map(article => setImageArray(article.meta.featuredImg)) : null
                 articleData ? articleData.map(article => {
-                    // setImageArray(article.meta.featuredImg)
                     article.meta.featuredImg ? setImageArray(article.meta.featuredImg) : null
                 }) : null
 
-                
             })
         } 
     },[])
@@ -41,28 +53,18 @@ const Module = props => {
             }
             const glide = new window.Glide(`.glide_${componentId}`, {
                 type: 'carousel',
+                animationDuration: 800,
                 perView: 1,
-                focusAt: 0,
-                breakpoints: {
-                    4000: {
-                        perView: 1
-                    },
-                    1280: {
-                        perView: 1
-                    },
-                    720: {
-                        perView: 1
-                    },
-                    540: {
-                        perView: 1
-                    }
-                }
+                focusAt: 'center',
+                startAt: 0,
+                autoplay: 2000,
             })
             // glide.on(['build.before'], function() {
             //     document.querySelector(`.glide_${componentId}`).classList.add(`opacity1`)
             // })
             currentGlide.current = glide
-            glide.mount()
+            glide.mount({ Autoplay })
+            glide.start()
         }
     }, [ componentId ])
 
@@ -82,8 +84,6 @@ const Module = props => {
             {console.log("IMAGE STATE:", imageArray)}
             {console.log("PROPS:", props)}
 
-            {articleData ? articleData.map(article => <div>{article.title}</div>) : "loading..."}
-
             <div className={`${Styles.IndexHelloContainer} glide_${componentId} ${moduleName}_IndexHelloContainer ${props.className}`}>
             {
                 props.groupLabel
@@ -94,12 +94,15 @@ const Module = props => {
             }
             <div data-glide-el="track" className={`${Styles.GlideTrack} glide__track`}>
                 <ul className={`${Styles.IndexItemsContainer} glide__slides ${moduleName}_IndexItemsContainer ${props.IndexItemsContainerClassName}`}>
-                    {
+
+                    {articleData ? articleData.map((article, index) => <li className='glide__slide' style={{ border: "1px solid white" }} key={index}>{article.title}</li>) : "loading..."}
+                    
+                    {/* {
                         useItems.map((m, i) =>
                             (
                                 <div className={`${Styles.IndexItemUpperContainer} ${props.tall ? `${Styles.IndexItemsUpperContainerTall}` : null} ${moduleName}_Container`} key={i}>
                                     <Link href={m.date && !datePassed(m.date) && m?.item?.id ? `/e?p=${m.item.id}` : m.streamId ? `/w?v=${m.streamId}` : `/w?u=${m.author}`} style={{ alignSelf: 'center' }}>
-                                        <div className={`${Styles.BgContainer} ${props.tall ? `${Styles.BgContainerTall}` : null} ${moduleName}_BgContainer ${props.bgClassName}`} style={{ backgroundImage: `url(${m.leadBg && m?.leadBg !== '' ? m.leadBg : "https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg"})` }}>
+                                        <div className={`${Styles.BgContainer} ${props.tall ? `${Styles.BgContainerTall}` : null} ${moduleName}_BgContainer ${props.bgClassName}`} style={{ backgroundImage: `url(${m.leadBg && m?.leadBg !== '' ? m.leadBg : "img/default/greythumb.jpg"})` }}>
                                             {props.children}
                                             <div className={`${Styles.FillPageContainer} ${moduleName}_FillPageContainer`}>
                                                 <div className={`${Styles.TimeContainer} ${moduleName}_TimeContainer ${props.timeContainerClassName}`}>
@@ -125,7 +128,7 @@ const Module = props => {
                                                                 loader={() => {
                                                                     return props.dev && m.icon ? `${m.icon}` : m.icon && props.cdn && props.cdn.static && props.cdn.static.length > 0 ? `${props.cdn.static}/${m.icon}` : 'img/default/greythumb.jpg'
                                                                 }}
-                                                                src={props.dev && m.icon ? `${m.icon}` : m.icon && props.cdn && props.cdn.static && props.cdn.static.length > 0 ? `${props.cdn.static}/${m.icon}` : 'img/default/greythumb.jpg'}
+                                                                src={"https://cdn.nba.com/manage/2024/05/under25_v2_16x9-1-copy.jpg"}
                                                                 style={{ maxWidth: '60px', borderRadius: '4rem' }}
                                                                 alt={m.author}
                                                                 width={m.iconWidth ?? '60'}
@@ -143,11 +146,11 @@ const Module = props => {
                                                     <Link href={`/p?u=${m?.author}`} style={{ alignSelf: 'center' }}>
                                                         <div className={`${Styles.Author} ${moduleName}_Author ${props.authorClassName}`}>{m.author}</div>
                                                     </Link>
-                                                    {/* {
+                                                    {
                                                         m.description && m.description !== ''
                                                             ? <div className={`${Styles.Description} ${moduleName}_Description ${props.descriptionClassName}`}>{m.description}</div>
                                                             : null
-                                                    } */}
+                                                    }
                                                     {
                                                         m?.item?.type === 'ticket' && m?.item?.id && m?.item?.style && m?.item?.option
                                                             ? <button className={`${Styles.CtaButton} ${moduleName}_Cta ${props.ctaClassName}`} onClick={handleFireGlobalEvent} action={['add_to_cart', 'buy'].indexOf(m?.action) > -1 ? m.action : 'add_to_cart'} item={m?.item?.id} selectedstyle={m?.item?.style} currentoption={m?.item?.option} ref={ctaRef} ctaAfter={m.ctaAfter} cta={m.cta}>{m.cta}</button>
@@ -160,7 +163,7 @@ const Module = props => {
                                 </div>
                             )
                         )
-                    }
+                    } */}
                 </ul>
             </div>
         </div>
