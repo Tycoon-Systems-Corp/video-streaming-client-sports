@@ -854,6 +854,7 @@
     margin: 0 1.5rem;
 }
 
+
 // Autoplay carousel styles (DEFAULT, mobile)
 
     .AutoplayCarouselContainer {
@@ -861,9 +862,6 @@
         background-position: center center;
         background-size: cover;
         min-height: 250px;
-        // display: flex;
-        // flex-direction: column;
-        // justify-content: end;
 
         li {
             align-self: self-end;
@@ -895,13 +893,6 @@
         font-size: .85rem;
     }
 
-    // .CarouselBgImg {
-    //     background-repeat: no-repeat;
-    //     background-position: center center;
-    //     background-size: cover;
-    //     background-image: url("/public/img/default/greythumb.jpg");
-    // }
-
     .CarouselTabContainer {
         display: flex;
         gap: 3px;
@@ -925,3 +916,13 @@
     }
 
     // Autoplay carousel styles (BREAKPOINTS, larger screens)
+
+    @media (min-width: 1200px) {
+        .CarouselParent {
+            max-width: 800px;
+        }
+        
+        .AutoplayCarouselContainer {
+            min-height: 500px;
+        }
+    }

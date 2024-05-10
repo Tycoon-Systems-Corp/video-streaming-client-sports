@@ -46,7 +46,6 @@ const Module = props => {
             })
         } 
     },[ componentDidMount, props.stagger ])
-    // console.log(fetchArticle())
 
     React.useEffect(() => {
         if (componentId && window && window.Glide) {
@@ -116,7 +115,7 @@ const Module = props => {
                 
             </div>
 
-            <div className={`${Styles.Carousel}`}>
+            <div className={`${Styles.CarouselParent}`}>
                 <div data-glide-el="track" className={`${Styles.GlideTrack} glide__track`}>
                     <ul className={`${Styles.IndexItemsContainer} glide__slides ${moduleName}_IndexItemsContainer ${props.IndexItemsContainerClassName} ${Styles.AutoplayCarouselContainer}`} style={{ backgroundImage: 'url("https://cdn.nba.com/manage/2024/05/luka-dort-1080-2001613153.jpg")', height: '100%', width: '100%' }}>
 
