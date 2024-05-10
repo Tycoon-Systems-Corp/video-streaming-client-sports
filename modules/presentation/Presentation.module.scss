@@ -854,58 +854,70 @@
     margin: 0 1.5rem;
 }
 
-// Autoplay carousel styles
+// Autoplay carousel styles (DEFAULT, mobile)
 
-.AutoplayCarouselContainer {
-    padding-left: 1rem;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-}
+    .AutoplayCarouselContainer {
+        padding-left: 1rem;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        min-height: 250px;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: end;
 
-.CarouselLeadText {
-    margin-bottom: .7rem;
-    font-weight: 600;
-    font-size: 1.2rem;
-    max-width: 90%;
-}
+        li {
+            align-self: self-end;
+            margin-bottom: 1rem;
+        }
+    }
 
-.RedLine {
-    background-color: red;
-    width: 42px;
-    height: 3px;
-    margin-bottom: 5px;
-}
+    .CarouselLeadText {
+        margin-bottom: .7rem;
+        font-weight: 600;
+        font-size: 1.2rem;
+        max-width: 90%;
+    }
 
-.ReadMoreLink {
-    color: red;
-    font-size: .85rem;
-}
+    .RedLine {
+        background-color: red;
+        width: 42px;
+        height: 3px;
+        margin-bottom: 5px;
+    }
 
-// .CarouselBgImg {
-//     background-repeat: no-repeat;
-//     background-position: center center;
-//     background-size: cover;
-//     background-image: url("/public/img/default/greythumb.jpg");
-// }
+    .ReadMoreLink {
+        color: red;
+        font-size: .85rem;
+    }
 
-.CarouselTabContainer {
-    display: flex;
-    gap: 3px;
-}
+    // .CarouselBgImg {
+    //     background-repeat: no-repeat;
+    //     background-position: center center;
+    //     background-size: cover;
+    //     background-image: url("/public/img/default/greythumb.jpg");
+    // }
 
-.CarouselTab {
-    padding: 10px;
-    font-size: .8rem;
-    overflow: hidden;
-    max-height: 42px;
-    overflow: hidden;
-    line-height: 15px;
-    border-top: 2px solid white
-}
+    .CarouselTabContainer {
+        display: flex;
+        gap: 3px;
+    }
+
+    .CarouselTab {
+        padding: 10px;
+        font-size: .8rem;
+        overflow: hidden;
+        max-height: 42px;
+        overflow: hidden;
+        line-height: 15px;
+        border-top: 2px solid white;
+    }
 
 
-.CurrentTab {
-    @extend .CarouselTab;
-    border-top-color: red;
-}
+    .CurrentTab {
+        @extend .CarouselTab;
+        border-top-color: red;
+        color: red;
+    }
+
+    // Autoplay carousel styles (BREAKPOINTS, larger screens)

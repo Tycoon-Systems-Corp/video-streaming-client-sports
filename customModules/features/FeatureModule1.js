@@ -19,7 +19,7 @@ const Module = props => {
     const [ articleData, setArticleData ] = React.useState(null)
     const [ imageArray, setImageArray ] = React.useState([])
     const [ stagger, setStagger ] = React.useState(false)
-    const [ currentTab, setCurrentTab ] = React.useState(0)
+    const [ currentTab, setCurrentTab ] = React.useState(1)
     const staggerRef = React.useRef()
     
     React.useEffect(() => {
@@ -123,13 +123,9 @@ const Module = props => {
                         {articleData ? articleData.map((article, index) => 
                             <li className='glide__slide' key={index}>
                                 <div className={`${Styles.RedLine}`}></div>
-                                <div 
-                                // className={`${Styles.CarouselBgImg}`}
-                                //  style=
-                                //  {{ backgroundImage: `${article.featuredImg} ? url(${article.featuredImg}) : url("https://media.tarkett-image.com/large/TH_24567080_24594080_24596080_24601080_24563080_24565080_24588080_001.jpg")` }}
-                                 >
+                                <div>
                                     <div className={`${Styles.CarouselLeadText}`}>{article.title}</div>
-                                <Link href='https://www.google.ca' className={`${Styles.ReadMoreLink}`} target='_blank'>READ MORE</Link>
+                                    <Link href='https://www.google.ca' className={`${Styles.ReadMoreLink}`} target='_blank'>READ MORE</Link>
                                  </div>
                             </li>)
                             
