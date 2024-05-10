@@ -857,7 +857,6 @@
 // Autoplay carousel styles (DEFAULT, mobile)
 
     .AutoplayCarouselContainer {
-        padding-left: 1rem;
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
@@ -868,8 +867,13 @@
 
         li {
             align-self: self-end;
-            margin-bottom: 1rem;
+            padding-bottom: 1rem;
         }
+    }
+
+    .TextOverlayContainer {
+        padding-left: 1rem;
+        background-color: rgb(0, 0, 0, .7);
     }
 
     .CarouselLeadText {

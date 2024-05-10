@@ -121,7 +121,7 @@ const Module = props => {
                     <ul className={`${Styles.IndexItemsContainer} glide__slides ${moduleName}_IndexItemsContainer ${props.IndexItemsContainerClassName} ${Styles.AutoplayCarouselContainer}`} style={{ backgroundImage: 'url("https://cdn.nba.com/manage/2024/05/luka-dort-1080-2001613153.jpg")', height: '100%', width: '100%' }}>
 
                         {articleData ? articleData.map((article, index) => 
-                            <li className='glide__slide' key={index}>
+                            <li className={`${Styles.TextOverlayContainer} glide__slide`} key={index}>
                                 <div className={`${Styles.RedLine}`}></div>
                                 <div>
                                     <div className={`${Styles.CarouselLeadText}`}>{article.title}</div>
