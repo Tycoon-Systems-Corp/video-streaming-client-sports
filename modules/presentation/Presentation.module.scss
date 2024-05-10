@@ -1,3 +1,5 @@
+@import "../../node_modules/@glidejs/glide/src/assets/sass/glide.core.scss";
+
 .IndexBgContainer {
     position: relative;
     margin-bottom: 1rem;
@@ -850,4 +852,60 @@
 
 .sliderContainer {
     margin: 0 1.5rem;
+}
+
+// Autoplay carousel styles
+
+.AutoplayCarouselContainer {
+    padding-left: 1rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.CarouselLeadText {
+    margin-bottom: .7rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+    max-width: 90%;
+}
+
+.RedLine {
+    background-color: red;
+    width: 42px;
+    height: 3px;
+    margin-bottom: 5px;
+}
+
+.ReadMoreLink {
+    color: red;
+    font-size: .85rem;
+}
+
+// .CarouselBgImg {
+//     background-repeat: no-repeat;
+//     background-position: center center;
+//     background-size: cover;
+//     background-image: url("/public/img/default/greythumb.jpg");
+// }
+
+.CarouselTabContainer {
+    display: flex;
+    gap: 3px;
+}
+
+.CarouselTab {
+    padding: 10px;
+    font-size: .8rem;
+    overflow: hidden;
+    max-height: 42px;
+    overflow: hidden;
+    line-height: 15px;
+    border-top: 2px solid white
+}
+
+
+.CurrentTab {
+    @extend .CarouselTab;
+    border-top-color: red;
 }
