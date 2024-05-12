@@ -2,6 +2,10 @@
 
 .container {
     top: 0;
+
+    @media (min-width: 1200px) {
+        top: 155px
+    }
     position: fixed;
     padding-bottom: .25rem;
     color: white;
