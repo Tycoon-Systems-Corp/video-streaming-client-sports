@@ -1,11 +1,26 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import Styles from '../../modules/presentation/Presentation.module.scss'
+import SideBarStyles from './SideBar.module.scss'
 import { fetchArticle } from "./articleRequest"
 import Link from 'next/link'
 import Image from 'next/image'
 import Glide, { Autoplay } from "@glidejs/glide/dist/glide.modular.esm"
 
+const sideBarConfig = [
+        {
+            lead: "THE NBA SUPERSTAR EXPERIENCE",
+            description: "Feel like a pro regardless of your skill level!",
+            ctaBtnText: "LEARN MORE",
+            imageUrl: "https://digitalshift-assets.sfo2.cdn.digitaloceanspaces.com/pw/6e7aa105-ef52-4ef0-aa61-6774fa74e015/p-fb47b3dd-394e-444a-8ae8-181af479b2f3/1701994288-promo.jpg"
+        },
+        {
+            lead: "POWERED BY CANADA BASKETBALL",
+            description: "As seen on ESPN, Overtime, House of Highlights and more!",
+            ctaBtnText: "REGISTER NOW",
+            imageUrl: "https://digitalshift-assets.sfo2.cdn.digitaloceanspaces.com/pw/6e7aa105-ef52-4ef0-aa61-6774fa74e015/p-c47e50f0-a4c0-4ab4-b39a-c34be0ab4ca3/1701994314-promo.png"
+        }
+    ]
 
 const moduleName = 'IndexBgHello'
 
@@ -21,6 +36,8 @@ const Module = props => {
     const [ stagger, setStagger ] = React.useState(false)
     const [ currentTab, setCurrentTab ] = React.useState(1)
     const staggerRef = React.useRef()
+
+    
     
     React.useEffect(() => {
         if (!componentDidMount) {
@@ -111,12 +128,8 @@ const Module = props => {
                 </div>
             </div> */}
 
-            <div>
-                
-            </div>
-
             <div className={`${Styles.CarouselParent}`}>
-                <div data-glide-el="track" className={`${Styles.GlideTrack} glide__track`}>
+                <div data-glide-el="track" className={`${Styles.GlideTrack} ${Styles.AutoplayGlideTrack} glide__track`}>
                     <ul className={`${Styles.IndexItemsContainer} glide__slides ${moduleName}_IndexItemsContainer ${props.IndexItemsContainerClassName} ${Styles.AutoplayCarouselContainer}`} style={{ backgroundImage: 'url("https://cdn.nba.com/manage/2024/05/luka-dort-1080-2001613153.jpg")', height: '100%', width: '100%' }}>
 
                         {articleData ? articleData.map((article, index) => 
@@ -209,6 +222,41 @@ const Module = props => {
                             : "loading..."}
                     </div>
                 </div>
+            </div>
+
+            <div className={`${SideBarStyles.SideBarContainer}`}>
+                {sideBarConfig.map(card => {
+                    return (
+                        <div className={`${SideBarStyles.SideBarCard}`}>
+                        
+                        <img 
+                        src={card.imageUrl}
+                        alt='placeholder'
+                        // width={"100px"}
+                        // height={'auto'}
+                        // layout='responsive'
+                        className={`${SideBarStyles.CardImage}`}
+                        />
+
+                        <div className={`${SideBarStyles.CardTextContainer}`}>
+                            <p style={{ fontWeight: 'bold', fontSize: '1.3rem', margin: '0px' }}>{card.lead}</p>
+                            <p>{card.description}</p>
+                            <button className={`ctaButton`}>
+                                <span>{card.ctaBtnText}</span>
+                            </button>
+                        </div>
+                    </div>
+                    )
+                })}
+
+                <a href="https://wwww.google.ca" target='_blank' style={{ backgroundColor: 'black', color: 'red', fontWeight: 'bold', padding: '1rem', display: 'flex', justifyContent: 'space-between', fontSize: '.8rem', marginTop: '.8rem', marginBottom: '.9rem' }}>
+                    <span>BRODIE BETTING IS LIVE!</span>
+                    <span>LEARN MORE</span>
+                </a>
+
+                <img src="https://digitalshift-assets.sfo2.cdn.digitaloceanspaces.com/pw/6e7aa105-ef52-4ef0-aa61-6774fa74e015/p-fdaa3774-5bdb-4242-b50e-8bb9c5374bce/1713733157-full.jpg" alt="placeholder"
+                className={`${SideBarStyles.BrodieFantasyImg}`} 
+                />
             </div>
         </React.Fragment>
     )

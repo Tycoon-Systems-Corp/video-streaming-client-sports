@@ -896,16 +896,18 @@
     .CarouselTabContainer {
         display: flex;
         gap: 3px;
+        background-color: black;
     }
 
     .CarouselTab {
         padding: 10px;
         font-size: .8rem;
         overflow: hidden;
-        max-height: 42px;
         overflow: hidden;
         line-height: 15px;
         border-top: 2px solid white;
+        background-color: black;
+        padding-bottom: 20px;
     }
 
 
@@ -942,7 +944,7 @@
     }
 
     @media (min-width: 1200px) {
-        .CarouselParent {
+        .AutoplayGlideTrack {
             max-width: 800px;
         }
         
