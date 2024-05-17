@@ -250,7 +250,7 @@ const Module = props => {
                 }): null } 
 
                 <a href="https://wwww.google.ca" target='_blank' style={{ backgroundColor: 'black', color: 'red', fontWeight: 'bold', padding: '1rem', display: 'flex', justifyContent: 'space-between', fontSize: '.8rem', marginTop: '.8rem', marginBottom: '.9rem' }}>
-                    <span>BRODIE BETTING IS LIVE!</span>
+                    <span>FILCAN BROTHERHOOD IS LIVE!</span>
                     <span>LEARN MORE</span>
                 </a>
 
