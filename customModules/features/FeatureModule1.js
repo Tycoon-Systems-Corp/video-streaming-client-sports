@@ -56,9 +56,10 @@ const Module = props => {
             fetchArticle().then((response) => {
                 console.log(response)   
                 response ? setArticleData(response.data.fetchedData[0].articleReq[0]) : null
-                articleData ? articleData.map(article => {
-                    article.meta.featuredImg ? setImageArray(article.meta.featuredImg) : null
-                }) : null
+                
+                // articleData ? articleData.map(article => {
+                //     article.meta.featuredImg ? setImageArray(article.meta.featuredImg) : null
+                // }) : null
 
             })
         } 
